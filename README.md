@@ -1,71 +1,50 @@
+# GitLab B.V. Node.js Express Project
+
+This repository is for a Node.js Express project. The project includes examples of how to set up an Express server, use docker, and test using Supertest and Mocha. The project is built to be run in a Docker environment. In the sections below, you will find the steps to setup and run the project.
+
 ## Developer Certificate of Origin and License
-By contributing to GitLab B.V., you accept and agree to the following terms and conditions for your present and future contributions submitted to GitLab B.V. Except for the license granted herein to GitLab B.V. and recipients of software distributed by GitLab B.V., you reserve all right, title, and interest in and to your Contributions. All contributions are subject to the Developer Certificate of Origin and license set out at [docs.gitlab.com/ce/legal/developer_certificate_of_origin](https://docs.gitlab.com/ce/legal/developer_certificate_of_origin). _This notice should stay as the first item in the CONTRIBUTING.md file._
-## Code of conduct
-As contributors and maintainers of this project, we pledge to respect all people who contribute through reporting issues, posting feature requests, updating documentation, submitting pull requests or patches, and other activities. We are committed to making participation in this project a harassment-free experience for everyone, regardless of level of experience, gender, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, or religion. Examples of unacceptable behavior by participants include the use of sexual language or imagery, derogatory comments or personal attacks, trolling, public or private harassment, insults, or other unprofessional conduct.
-Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct. Project maintainers who do not follow the Code of Conduct may be removed from the project team. This code of conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Instances of abusive, harassing, or otherwise unacceptable behavior can be reported by emailing contact@gitlab.com. This Code of Conduct is adapted from the [Contributor Covenant](https://contributor-covenant.org), version 1.1.0, available at [https://contributor-covenant.org/version/1/1/0/](https://contributor-covenant.org/version/1/1/0/).
-FROM node:21-alpine 
-WORKDIR /usr/src/app
-COPY . .
-RUN npm install
-EXPOSE 80
-CMD [ "npm", "start" ]
+By contributing to GitLab B.V., you accept and agree to the following terms and conditions for your present and future contributions submitted to GitLab B.V. Except for the license granted herein to GitLab B.V. and recipients of software distributed by GitLab B.V., you reserve all right, title, and interest in and to your Contributions. All contributions are subject to the Developer Certificate of Origin and license set out at [here](https://docs.gitlab.com/ce/legal/developer_certificate_of_origin). _This notice should stay as the first item in the CONTRIBUTING.md file._
+
+## Prerequisites
+
+You need to have the following installed:
+- Node.js version 14 or later
+- npm version 7 or later
+- Docker version 21 or later
+- Git
+
+Instead of running this project locally, you can also pull the docker image using command `docker pull node:21-alpine`.
+
+## Install Dependencies
+
+To install dependencies, run `npm install` in the terminal. This will install express, mocha, and supertest.
+
+## Local Setup
+
+To start the server, use the `npm start` command. The app will be running at `http://localhost:5000`.
+
+## Docker Setup
+
+1. To build the Docker image, run `docker build -t gitlab/nodejs-express:v1 .`
+2. To start a Docker container, run `docker run -d -p 80:5000 gitlab/nodejs-express:v1`
+3. The app will be running at `http://localhost:5000`
+
+## Testing
+
+To test, run command `npm test` in your terminal. It will use Mocha & Supertest to test Express routes.
+
+## CI/CD Setup
+
+Please refer to the specific CI/CD pipeline configuration for further instructions.
+
+## Code of Conduct
+
+We follow the Contributor Covenant code of conduct. Find it [here](https://contributor-covenant.org/version/1/1/0/).
+
+## License
+
 MIT License
-Copyright(c)2017-Present GitLab B.V.
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files(the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const express = require('express');
-const request = require('supertest');
-const assert = require('assert');
-const app = express();
-const port = process.env.PORT || 5000;
+Copyright(c)2017-Present GitLab B.V. 
 
-app.get('/', (req, res) => {
-    return res.status(200).send({
-        message: "Hello World!"
-    });
-});
-
-app.listen(port, () => {
-    console.log("Listening on " + port);
-});
-
-describe('GET /', () => {
-    it('responds responds to the world', async function() {
-        const res = await request(app).get('/').set('Accept', 'application/json');
-        assert.equal(res.status, 200);
-        assert.equal(res.type, 'application/json');
-        assert.equal(res.body.message, 'Hello World!');
-    });
-});
-
-describe('GET /404', () => {
-    it('responds with a 404', async function() {
-        const res = await request(app).get('/404').set('Accept', 'application/json');
-        assert.equal(res.status, 404);
-    });
-});
-
-module.exports = app;
-
-{
-    "name": "demo",
-    "version": "0.0.0",
-    "lockfileVersion": 3,
-    "requires": true,
-    "packages": {
-        "": {
-            "name": "demo",
-            "version": "0.0.0",
-            "license": "MIT",
-            "dependencies": {
-                "express": "^4.18.2"
-            },
-            "devDependencies": {
-                "mocha": "^10.2.0",
-                "supertest": "^6.3.4"
-            }
-        }
-    }
-}
+The above copyright notice and this permission notice should be included in all copies or substantial portions of the Software.
