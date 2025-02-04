@@ -1,7 +1,17 @@
-```
+```markdown
 # Node Express Template Project
 
-This project is a template for Node.js Express applications. It's an Express.js app that comes with a basic hello world route and HTTP response.
+This project provides a template for creating applications using Node.js and Express.js. Its base setup includes a basic server that responds with a "Hello World!" message.
+
+## Table of Contents
+
+- [Software Requirements](#software-requirements)
+- [Database Requirements](#database-requirements)
+- [Installation Steps](#installation-steps)
+- [Local Development](#local-development)
+- [Testing](#testing)
+- [Building and Running in Docker](#building-and-running-in-docker)
+- [Continuous Integration/Continuous Deployment (CI/CD) Pipeline](#continuous-integrationcontinuous-deployment-cicd-pipeline)
 
 ## Software Requirements
 
@@ -21,7 +31,9 @@ For Windows:
 
 No database requirements specified.
 
-## Installing Steps for MacOS
+## Installation Steps
+
+### For MacOS
 
 1. Install [Homebrew](https://brew.sh/)
 ```
@@ -48,7 +60,7 @@ cd {repo name}
 npm install
 ```
 
-## Installing Steps for Windows
+### For Windows
 
 1. Install Node.js & npm. Instructions can be found [here](https://nodejs.org/en/download/package-manager/#windows)
 2. Install Docker for Windows. Instructions can be found [here](https://docs.docker.com/docker-for-windows/install/)
@@ -73,6 +85,8 @@ Start the development server with:
 node server.js
 ```
 
+Visit `http://localhost:5000` on your browser to view the application.
+
 ## Testing
 
 Run tests with:
@@ -93,9 +107,9 @@ docker build -t {repo name} .
 ```
 docker run -p 5000:80 {repo name}
 ```
-It's set up to expose port 80, so you can navigate to `http://localhost:5000` on your browser.
+This will run the server and expose it at port 80, so you can navigate to `http://localhost:5000` on your browser.
 
-## CI/CD pipeline
+## Continuous Integration/Continuous Deployment (CI/CD) Pipeline
 
-This project is set up to work with GitLab's Auto DevOps CI/CD pipeline. If not already enabled for this project, then you can turn it on from Project Settings as per [GitLab's documentation](https://docs.gitlab.com/ee/topics/autodevops/#enable-or-disable-auto-devops).
+This project is set up to work with GitLab's Auto DevOps CI/CD pipeline. If not already enabled for this project, you can turn it on from Project Settings. For the detailed steps, refer to [GitLab's documentation](https://docs.gitlab.com/ee/topics/autodevops/#enable-or-disable-auto-devops).
 ```
